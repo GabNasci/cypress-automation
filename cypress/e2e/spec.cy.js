@@ -14,6 +14,16 @@ describe.only('Suíte de testes do integrado.', () => {
 
   })
 
+  it.only('Deve a opção de graduação e informar CPF e DATA NASCIMENTO.', () => {
+    cy.visit('https://portal.apprbs.com.br/ceigraduacao/login')
+    cy.get('#mat-input-0').type('000.000.000-00')
+    cy.get('#mat-input-1').type('14/02/2025')
+    cy.contains('Acessar').should('exist').first().click()
+
+    cy.get('.ps-notification-title').should('have.text', 'Não foi possivel o login')
+
+  })
+
 })
 
 describe('Suíte de testes MageBit', () => {
