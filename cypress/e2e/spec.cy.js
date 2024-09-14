@@ -1,4 +1,4 @@
-describe.only('Suíte de testes do integrado.', () => {
+describe('Suíte de testes do integrado.', () => {
 
   it('Deve visitar a página do integrado validar campos Área do Candidato e Inscreva-se e o Título', () => {
     cy.visit('https://grupointegrado.br')
@@ -14,7 +14,7 @@ describe.only('Suíte de testes do integrado.', () => {
 
   })
 
-  it.only('Deve a opção de graduação e informar CPF e DATA NASCIMENTO.', () => {
+  it('Deve a opção de graduação e informar CPF e DATA NASCIMENTO.', () => {
     cy.visit('https://portal.apprbs.com.br/ceigraduacao/login')
     cy.get('#mat-input-0').type('000.000.000-00')
     cy.get('#mat-input-1').type('14/02/2025')
@@ -26,11 +26,27 @@ describe.only('Suíte de testes do integrado.', () => {
 
 })
 
-describe('Suíte de testes MageBit', () => {
+describe.only('Suíte de testes MageBit', () => {
   it('Deve acessar a página e validar o título.', () => {
     cy.visit('http://magento2-demo.magebit.com')
-    cy.title().should('eq', 'Magento 2 Commerce (Enterprise) Demo - Magebit')
+    cy.contains('Create an Account').should('exist').first().click()
+    cy.url().should('eq', 'https://magento2-demo.magebit.com/customer/account/create/')
 
+    cy.get('#firstname').type('Lal')
+
+    cy.get('#lastname').type('de Lilson')
+
+    cy.get('#is_subscribed').first().click()
+
+    cy.get('#email_address').type('sta8990@uorak.com')
+
+    cy.get('#password').type('CCnNmXbkJDbqw5n')
+
+    cy.get('#password-confirmation').type('CCnNmXbkJDbqw5n')
+
+    cy.get('button[title="Create an Account"]').first().click()
+
+    cy.get('.message-success').should('contain', 'Thank you for registering with Main Website Store.')
   })
 })
 
